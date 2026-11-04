@@ -1,0 +1,70 @@
+MISSION ORION-7 - QUESTIONNAIRE DE CONCEPTION POO
+NOM :
+PRÉNOM :
+LIEN DU DÉPÔT GITHUB :
+
+Consigne : répondez aux 15 questions dans CE fichier texte, après avoir réalisé
+votre programme. Pour chaque réponse, citez vos classes et donnez au moins
+un exemple concret tiré de votre code. N'écrivez pas seulement des définitions.
+
+QUESTION 01 - Quelles classes avez-vous créées et quelle responsabilité unique
+ou principale avez-vous attribuée à chacune ? Pourquoi ce découpage ?
+RÉPONSE :
+
+QUESTION 02 - Quelle classe pilote le déroulement global de la partie ?
+Quelles méthodes avez-vous prévues pour cela et que délèguent-elles ?
+RÉPONSE :
+
+QUESTION 03 - Où placez-vous l'oxygène du joueur ? Pourquoi ce choix plutôt
+qu'une variable globale ou une propriété accessible de partout ?
+RÉPONSE :
+
+QUESTION 04 - Quelles propriétés sont publiques, protégées ou privées dans
+vos classes ? Donnez au moins trois exemples et justifiez chaque niveau d'accès.
+RÉPONSE :
+
+QUESTION 05 - Quelles méthodes avez-vous créées pour dépenser et recharger
+l'oxygène ? Pourquoi ces méthodes plutôt que l'accès direct à une propriété ?
+Expliquez les validations (coûts, recharge, valeur minimale/maximale).
+RÉPONSE :
+
+QUESTION 06 - Quelle classe est responsable de l'inventaire et quelles méthodes
+permettent de le modifier ? Comment empêchez-vous les doubles usages ?
+RÉPONSE :
+
+QUESTION 07 - Comment représentez-vous les salles et leurs connexions ?
+Pourquoi avoir choisi cette structure (objets, listes, dictionnaires ou autre) ?
+RÉPONSE :
+
+QUESTION 08 - Quelle classe décide qu'une porte peut être franchie ?
+Décrivez la collaboration entre le joueur, la salle et cette classe.
+RÉPONSE :
+
+QUESTION 09 - Comment représentez-vous les objets et leurs effets ? Un objet
+sait-il s'utiliser lui-même ou sa logique est-elle déléguée ? Pourquoi ?
+RÉPONSE :
+
+QUESTION 10 - Avez-vous utilisé l'héritage ? Présentez la relation entre
+classe mère et classes filles et expliquez le partage de comportement obtenu.
+RÉPONSE :
+
+QUESTION 11 - Où apparaît le polymorphisme ? Donnez un exemple précis de
+même opération ayant un comportement différent suivant le type d'énigme.
+RÉPONSE :
+
+QUESTION 12 - Que se passe-t-il, classe par classe, lorsqu'un joueur utilise
+le badge pour ouvrir la porte de maintenance ? Décrivez les interactions.
+RÉPONSE :
+
+QUESTION 13 - Que se passe-t-il, classe par classe, lorsque le joueur tente
+de redémarrer le réacteur ? Précisez les vérifications et leurs responsables.
+RÉPONSE :
+
+QUESTION 14 - Comment séparez-vous l'affichage et les saisies console des
+règles métier ? Quel intérêt cela présente-t-il pour les tests et l'évolution ?
+RÉPONSE :
+
+QUESTION 15 - Si vous deviez ajouter une sixième salle, un nouvel objet et
+un troisième type d'énigme, quelles classes faudrait-il modifier ? Pourquoi ?
+Qu'amélioreriez-vous dans votre architecture actuelle ?
+RÉPONSE :

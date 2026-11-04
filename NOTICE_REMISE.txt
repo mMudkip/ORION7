@@ -1,0 +1,11 @@
+REMETTRE AVANT DIMANCHE 8 NOVEMBRE 2026 (23 H 59, heure de Paris)
+
+- Dépôt GitHub contenant le programme Python, main.py et vos classes.
+- README.md entièrement complété, avec instructions et scénarios de jeu.
+- REPONSES_POO_15_QUESTIONS.txt : quinze réponses concrètes.
+- SCENARIOS_VERIFICATION.md : scénarios réalisés indiqués dans le README.
+- Dépendances : Python 3.10+ ; aucune bibliothèque externe obligatoire.
+- Dépôt personnel : ne pas mettre de correction formateur dans le rendu.
+
+Rendre le LIEN de votre dépôt GitHub via le canal habituel du cours.
+Le code doit être exécutable par `python main.py`.
