@@ -1,4 +1,5 @@
 from salle import Salle
+from joueur import Joueur
 
 class StationOrbitale:
   def __init__(self, nom: str):
@@ -12,7 +13,7 @@ class StationOrbitale:
 
   # Renvoie un bool pour si la Salle en paramètre est présente dans la StationOrbitale
   def verifier_salle(self, salle: Salle):
-    return salle in self._acces_a
+    return salle in self.acces_a
 
   # Permet d'ajouter un lien entre une Salle et une autre (dans les 2 sens)
   def ajouter_acces(self, salle_1: Salle, salle_2: Salle, objet = None):
@@ -23,16 +24,33 @@ class StationOrbitale:
     # else:
     #   print(f"ERREUR : La salle \"{salle.nom}\" est déjà reliée à {self.nom}.")
 
-  def __str__(self):
-    return f"""\n{"=" * 40} {self.nom} {"=" * 40}
-Vous êtes dans Sas
+  def afficher_map(self, joueur: Joueur):
+    sas = " sas "
+    reserve = " réserve "
+    laboratoire = " laboratoire "
+    machines = " machines "
+    commande = " commande "
+
+    if joueur.emplacement.nom.lower() == sas.strip():
+      sas = "-SAS-"
+    elif joueur.emplacement.nom.lower() == reserve.strip():
+      reserve = "-RÉSERVE-"
+    elif joueur.emplacement.nom.lower() == laboratoire.strip():
+      laboratoire = "-LABORATOIRE-"
+    elif joueur.emplacement.nom.lower() == machines.strip():
+      machines = "-MACHINES-"
+    elif joueur.emplacement.nom.lower() == commande.strip():
+      commande = "-COMMANDE-"
+
+    print(f"""\n{"=" * 40} {self.nom} {"=" * 40}
+Vous êtes dans {joueur.emplacement.nom}
                 ┌───────────┐
-                │  réserve  │
+                │ {reserve} │
                 └─────┬─────┘
-    ┌───────┐         │
-    │ -SAS- ├─────────┤
-    └───────┘         │
+    ┌───────┬─────────┘
+    │ {sas} │
+    └───────┴─────────┐
               ┌───────┴───────┐               ┌────────────┐                  ┌────────────┐
-              │  laboratoire  ├── badge (X) ──┤  machines  ├── réacteur (X) ──┤  commande  │
+              │ {laboratoire} ├── badge (X) ──┤ {machines} ├── réacteur (X) ──┤ {commande} │
               └───────────────┘               └────────────┘                  └────────────┘
-    """
+    """)

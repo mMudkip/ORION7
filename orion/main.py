@@ -1,7 +1,10 @@
 from station import StationOrbitale
 from salle import Salle
+from joueur import Joueur
 
+# Setup
 orion = StationOrbitale("ORION-7")
+joueur = Joueur()
 
 s_sas = Salle("Sas")
 s_reserve = Salle("Réserve")
@@ -20,4 +23,11 @@ s_laboratoire.DEBUG_obtenir_acces()
 s_machines.DEBUG_obtenir_acces()
 s_commandes.DEBUG_obtenir_acces()
 
-print(orion)
+# Setup du départ
+joueur.emplacement = s_sas
+
+while True:
+  orion.afficher_map(joueur)
+  quitter = joueur.choix_deplacement()
+  if quitter:
+    break

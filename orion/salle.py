@@ -8,6 +8,9 @@ class Salle:
     # return salle in self.acces_a
     return any(s[0] == salle for s in self.acces_a)
 
+  def get_possibilite_acces(self):
+    return self.acces_a
+
   # DEBUG uniquement
   def DEBUG_nom(self):
     return f"{self.nom} {self}"
