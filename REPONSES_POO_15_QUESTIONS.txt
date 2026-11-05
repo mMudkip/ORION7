@@ -1,7 +1,7 @@
 MISSION ORION-7 - QUESTIONNAIRE DE CONCEPTION POO
-NOM :
-PRÉNOM :
-LIEN DU DÉPÔT GITHUB :
+NOM : Beauquis
+PRÉNOM : Thomas
+LIEN DU DÉPÔT GITHUB : https://github.com/mMudkip/ORION7
 
 Consigne : répondez aux 15 questions dans CE fichier texte, après avoir réalisé
 votre programme. Pour chaque réponse, citez vos classes et donnez au moins
@@ -9,62 +9,62 @@ un exemple concret tiré de votre code. N'écrivez pas seulement des définition
 
 QUESTION 01 - Quelles classes avez-vous créées et quelle responsabilité unique
 ou principale avez-vous attribuée à chacune ? Pourquoi ce découpage ?
-RÉPONSE :
+RÉPONSE : Il y a la classe StationOrbitale qui gère tout le système. La classe Joueur qui gère le joueur, son emplacement, son oxygène. Et les classes Salle et Objet ainsi que leurs variantes pour gérer chaque ainsi que les trucs spécifiques à chacune.
 
 QUESTION 02 - Quelle classe pilote le déroulement global de la partie ?
 Quelles méthodes avez-vous prévues pour cela et que délèguent-elles ?
-RÉPONSE :
+RÉPONSE : La classe StationOrbitale. generer_code, ajouter_salle, ajouter_acces, afficher_map et action.
 
 QUESTION 03 - Où placez-vous l'oxygène du joueur ? Pourquoi ce choix plutôt
 qu'une variable globale ou une propriété accessible de partout ?
-RÉPONSE :
+RÉPONSE : J'ai décidé de le placer sur l'affichage de la map, qui s'affiche après chaque action, donc comme ça, le visuel du niveau d'oxygène est update à chaque action.
 
 QUESTION 04 - Quelles propriétés sont publiques, protégées ou privées dans
 vos classes ? Donnez au moins trois exemples et justifiez chaque niveau d'accès.
-RÉPONSE :
+RÉPONSE : Tout est public, car tous les propriétés doivent pouvoir être accessibles pour tout le monde.
 
 QUESTION 05 - Quelles méthodes avez-vous créées pour dépenser et recharger
 l'oxygène ? Pourquoi ces méthodes plutôt que l'accès direct à une propriété ?
 Expliquez les validations (coûts, recharge, valeur minimale/maximale).
-RÉPONSE :
+RÉPONSE : J'ai pas créé de méthode, juste un accès direct avec une condition avant pour vérifier que le joueur a bien la quantité necéssaire.
 
 QUESTION 06 - Quelle classe est responsable de l'inventaire et quelles méthodes
 permettent de le modifier ? Comment empêchez-vous les doubles usages ?
-RÉPONSE :
+RÉPONSE : Je n'ai pas fait de classe pour l'inventaire, juste un simple attribut "objets" qui est une liste dans la classe Joueur.
 
 QUESTION 07 - Comment représentez-vous les salles et leurs connexions ?
 Pourquoi avoir choisi cette structure (objets, listes, dictionnaires ou autre) ?
-RÉPONSE :
+RÉPONSE : J'ai décidé d'opter pour un affichage propre avec de lignes. Par manque de possibilité j'ai opté pour "-nom-" et " NOM " pour indiquer dans quelle salle se trouve le joueur.
 
 QUESTION 08 - Quelle classe décide qu'une porte peut être franchie ?
 Décrivez la collaboration entre le joueur, la salle et cette classe.
-RÉPONSE :
+RÉPONSE : C'est géré via 2 méthodes (activer_badge et activer_reacteur), l'une est appelée par Joueur, l'autre par StationOrbitale. Je trouvais que c'était le plus simple compte tenu de la façon dont c'est fait.
 
 QUESTION 09 - Comment représentez-vous les objets et leurs effets ? Un objet
 sait-il s'utiliser lui-même ou sa logique est-elle déléguée ? Pourquoi ?
-RÉPONSE :
+RÉPONSE : Sa logique est déléguée car seul un Joueur peut utiliser un objet. Pour l'affichage j'ai opté pour 2 attributs nom et utilistion et un affichage "nom - utilistion"
 
 QUESTION 10 - Avez-vous utilisé l'héritage ? Présentez la relation entre
 classe mère et classes filles et expliquez le partage de comportement obtenu.
-RÉPONSE :
+RÉPONSE : Il y a la classe StationOrbitale qui gère tout le système. La classe Joueur qui gère le joueur, son emplacement, son oxygène. Et les classes Salle et Objet ainsi que leurs variantes pour gérer chaque ainsi que les trucs spécifiques à chacune.
 
 QUESTION 11 - Où apparaît le polymorphisme ? Donnez un exemple précis de
 même opération ayant un comportement différent suivant le type d'énigme.
-RÉPONSE :
+RÉPONSE : J'ai utilisé du polymorphisme pour l'affichage de l'observation d'une salle. Pour permettre un affichage custom selon le ou les objets présent.s.
 
 QUESTION 12 - Que se passe-t-il, classe par classe, lorsqu'un joueur utilise
 le badge pour ouvrir la porte de maintenance ? Décrivez les interactions.
-RÉPONSE :
+RÉPONSE : Tout d'abord, dans StationOrbitale.choix(), l'utilisateur tape le chiffre 4 pour utiliser un objet. Puis, toujours dans Joueur.choix_utilisation() il choisit le badge. Ensuite dans Joueur.utiliser(), un elif sélectionne le badge, ça retire l'oxygène, change l'attribut badge_utilise de Joueur, puis ça appelle utilier_badge() de la classe Salle qui va retirer la condition du lien et va appellé la même méthode MAIS sur la Salle avec laquelle est est relié.
 
 QUESTION 13 - Que se passe-t-il, classe par classe, lorsque le joueur tente
 de redémarrer le réacteur ? Précisez les vérifications et leurs responsables.
-RÉPONSE :
+RÉPONSE : Tout d'abord, dans StationOrbitale.choix(), l'utilisateur tape le chiffre 6 pour utiliser faire une tentative. Ensuite ça appelle Joueur.tenter_code() qui prend le code générer au tout début en paramètre. Puis l'utilisateur saisit un code. La méthode retourne True ou False selon si le code rentré est le bon ou pas.
 
 QUESTION 14 - Comment séparez-vous l'affichage et les saisies console des
 règles métier ? Quel intérêt cela présente-t-il pour les tests et l'évolution ?
-RÉPONSE :
+RÉPONSE : Avec des =. C'est simple, rapide, efficace et voyant.
 
 QUESTION 15 - Si vous deviez ajouter une sixième salle, un nouvel objet et
 un troisième type d'énigme, quelles classes faudrait-il modifier ? Pourquoi ?
 Qu'amélioreriez-vous dans votre architecture actuelle ?
-RÉPONSE :
+RÉPONSE : Je trouve que ce que j'ai fait est très modulable, donc ça ne devrait pas être trop compliqué de rajouter quelque chose d'autre.

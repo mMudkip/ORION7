@@ -8,6 +8,7 @@ class StationOrbitale:
     self.salles: list[Salle] = []
     self.code = self.generer_code()
     print(self.code)
+    self.reacteur_active = False
 
   def generer_code(self):
     return "".join([str(randint(0, 9)), str(randint(0, 9)), str(randint(0, 9)), str(randint(0, 9))])
@@ -48,6 +49,14 @@ class StationOrbitale:
     elif joueur.emplacement.nom.lower() == commande.strip():
       commande = "-COMMANDE-"
 
+    badge = "✗"
+    if joueur.badge_utilise:
+      badge = "✓"
+
+    reacteur = "✗"
+    if self.reacteur_active:
+      reacteur = "✓"
+
     print(f"""\n{"=" * 40} {self.nom} {"=" * 40}
 Vous êtes dans "{joueur.emplacement.nom}"\t\tOxygène : {joueur.oxygene} / 80
              ┌───────────┐
@@ -57,7 +66,7 @@ Vous êtes dans "{joueur.emplacement.nom}"\t\tOxygène : {joueur.oxygene} / 80
  │ {sas} │
  └───────┴─────────┐
            ┌───────┴───────┐               ┌────────────┐                  ┌────────────┐
-           │ {laboratoire} ├── badge (X) ──┤ {machines} ├── réacteur (X) ──┤ {commande} │
+           │ {laboratoire} ├── badge ({badge}) ──┤ {machines} ├── réacteur ({reacteur}) ──┤ {commande} │
            └───────────────┘               └────────────┘                  └────────────┘
 {"=" * 89}\n""")
 
@@ -88,10 +97,9 @@ Vous êtes dans "{joueur.emplacement.nom}"\t\tOxygène : {joueur.oxygene} / 80
 
         # Attendre / DEBUG_Quitter
         if choix == 8:
-          # TEMP
-          # if joueur.oxygene >= 5:
-          #   joueur.oxygene -= 5
-          return True
+          if joueur.oxygene >= 5:
+            print("\nVous décidez de patienter...")
+            joueur.oxygene -= 5
         
         # Se déplacer
         elif choix == 1:
@@ -140,6 +148,34 @@ Vous êtes dans "{joueur.emplacement.nom}"\t\tOxygène : {joueur.oxygene} / 80
           else:
             print("\nWARNING : vous n'avez pas assez d'oxygène pour pouvoir utiliser un objet.")
             continue
+
+        # Tenter un code
+        elif choix == 6:
+          if joueur.emplacement.nom == "Machines":
+            if joueur.emplacement.cable_utilise and joueur.emplacement.fusible_utilise:
+              # La méthode joueur.tenter_code(code) renvoie un booléen
+              self.reacteur_active = joueur.tenter_code(self.code)
+              if self.reacteur_active:
+                joueur.emplacement.activer_reacteur()
+                print("C'est le bon code ! Rends-toi dans Commande et échappe-toi de la Station !")
+              else:
+                print("C'est pas le bon code... retente ta chance.")
+            elif joueur.emplacement.cable_utilise and not joueur.emplacement.fusible_utilise:
+              print("\nWARNING : Il manque le Fusible pour pouvoir tenter un code.")
+            elif not joueur.emplacement.cable_utilise and joueur.emplacement.fusible_utilise:
+              print("\nWARNING : Il manque le Câble d'alimentation pour pouvoir tenter un code.")
+            elif not joueur.emplacement.cable_utilise and not joueur.emplacement.fusible_utilise:
+              print("\nWARNING : Il manque le Câble d'alimentation et le Fusible pour pouvoir tenter un code.")
+          else:
+            print("\nWARNING : vous devez être dans Machines pour pouvoir tenter un code.")
+
+        # Évacuer
+        elif choix == 7:
+          if joueur.emplacement.nom == "Commande":
+            print(f"\nVICTOIRE ! Tu as réussi à t'échapper de la Station {self.nom} avant d'arriver à court d'oxygène. Félicitations !")
+            return True
+          else:
+            print("\nWARNING : vous devez être dans Commande pour pouvoir évacuer.")
 
         # Montrer état/inventaire
         elif choix == 9:

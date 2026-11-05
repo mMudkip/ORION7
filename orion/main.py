@@ -1,6 +1,7 @@
 from station import StationOrbitale
 from salle import Sas, Reserve, Laboratoire, Machines, Commande
 from joueur import Joueur
+from objet import Badge, Cable, Fusible
 
 # Setup
 orion = StationOrbitale("ORION-7")
@@ -25,6 +26,8 @@ orion.ajouter_acces(s_machines, s_commandes, "Réacteur à activer")
 
 # Setup du départ
 joueur.emplacement = s_sas
+#DEBUG
+# joueur.objets = [Badge(), Cable(), Fusible()]
 
 while True:
   if joueur.oxygene > 0:

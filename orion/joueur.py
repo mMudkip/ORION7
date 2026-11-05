@@ -7,6 +7,8 @@ class Joueur:
     self.oxygene = 48
     self.objets = []
 
+    self.badge_utilise = False
+
   def montrer_etat(self):
     print(f"\nVous êtes dans \"{self.emplacement.nom}\"")
     print(f"Vous avez {self.oxygene} / 80 en oxygène.")
@@ -123,7 +125,6 @@ class Joueur:
             continue
         # Si le choix est correct mais n'est pas l'annulation
         if choix <= len(self.objets):
-          print(f"Vous avez utilisé {self.objets[choix - 1].nom}.")
           self.utiliser(self.objets[choix - 1])
         # Si le choix est l'annulation
         else:
@@ -132,9 +133,51 @@ class Joueur:
       except ValueError:
         print("ERREUR : Valeur incorrecte, utilisation annulé.")
 
+  # Utilise un objet
   def utiliser(self, objet: Objet):
-    if objet.nom == "Bonbonne":
+    if objet.nom == "Badge de maintenance":
+      if self.badge_utilise:
+        print("WARNING : Vous avez déjà utilisé le Badge de maintenance.")
+      elif self.emplacement.nom != "Laboratoire":
+        print("WARNING : Vous devez être dans le Laboratoire pour utiliser le Badge de maintenance.")
+      else:
+        self.oxygene -= 2
+        self.badge_utilise = True
+        self.emplacement.utiliser_badge()
+        print(f"Vous avez utilisé {objet.nom}.")
+        print("L'accès à la salle \"machines\" est désormais ouvert.")
+    elif objet.nom == "Câble électrique":
+      if self.emplacement.nom != "Machines":
+        print("WARNING : Vous devez être dans Machines pour utiliser le Câble électrique.")
+      else:
+        self.oxygene -= 2
+        self.emplacement.cable_utilise = True
+        self.objets.remove(objet)
+        print(f"Vous avez utilisé {objet.nom}.")
+        if not self.emplacement.fusible_utilise:
+          print("Il manque le Fusible pour pouvoir faire une tentative de redémarrer le Réacteur.")
+        else:
+          print("Le Câble électrique et le Fusible sont intallés, vous pouvez faire une tentative de redémarrer le Réacteur !")
+    elif objet.nom == "Fusible":
+      if self.emplacement.nom != "Machines":
+        print("WARNING : Vous devez être dans Machines pour utiliser le Fusible.")
+      else:
+        self.oxygene -= 2
+        self.emplacement.fusible_utilise = True
+        self.objets.remove(objet)
+        print(f"Vous avez utilisé {objet.nom}.")
+        if not self.emplacement.cable_utilise:
+          print("Il manque le Câble électrique pour pouvoir faire une tentative de redémarrer le Réacteur.")
+        else:
+          print("Le Câble électrique et le Fusible sont intallés, vous pouvez faire une tentative de redémarrer le Réacteur !")
+    elif objet.nom == "Bonbonne":
       self.oxygene += 30
       self.oxygene -= 2
       self.objets.remove(objet)
+      print(f"Vous avez utilisé {objet.nom}.")
       print("Vous avez regagné 30 d'oxygène.")
+
+  def tenter_code(self, code: str):
+    self.oxygene -= 3
+    tentative = input("\nQuel est le code d'activation du réacteur ? ")
+    return tentative == code
