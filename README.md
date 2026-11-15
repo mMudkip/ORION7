@@ -11,10 +11,10 @@ Lire les PDF dans `../DOCUMENTATION_ETUDIANTS` avant de coder.
 ## Lancer le programme
 
 ```bash
-python main.py
+python orion/main.py
 ```
 
-Remplacer ce texte par les consignes adaptées à **votre réalisation**.
+Utilisez les chiffres de 1 à 9 puis valider avec Entrée pour effectuer une action.
 
 ## À compléter avant remise
 
